@@ -1,7 +1,9 @@
 import numpy
 
-R=5
-C=2
+R=2
+C=5
+
+
 Y="IMPOSSIBLE"
 
 Casillas=numpy.zeros((R,C,2))
@@ -12,7 +14,7 @@ for i in range(R):
         Casillas[i][j][1]=int(j+1)
         
 
-count=0
+
 Path=[[]]
 Change=True
 
@@ -25,13 +27,13 @@ while Change:
             
             if len(Path)==C*R:
                 Y="POSSIBLE"
-                L=Path   
+                L=Path
             
                                 
             else:
                 Path=[[]] #Si vuelve aquí es que no ha ido y se reescribe
-                r=Casillas[i,j,0]
-                c=Casillas[i,j,1]
+                r=int(Casillas[i,j,0])
+                c=int(Casillas[i,j,1])
                 Place=[r,c]
                 Path.append(Place)
                 Path.pop(0)
@@ -43,8 +45,8 @@ while Change:
                     for ii in range (R):
                         for jj in range (C):
                             #Demás coordenadas
-                            r=Casillas[ii,jj,0]
-                            c=Casillas[ii,jj,1]
+                            r=int(Casillas[ii,jj,0])
+                            c=int(Casillas[ii,jj,1])
                             if not (r==rp or c==cp or r-c==rp-cp or r+c==rp+cp or [r,c] in Path):
                                 #Añade coordenada si cumple condiciones
                                 Place=[r,c]
@@ -52,15 +54,20 @@ while Change:
                                 rp=r
                                 cp=c
                                 Changing=True
-                if len(Path) == C*R or (i==5 and j==5):
+                if len(Path) == C*R or (i==4 and j==4):
                     Change=False
                 else:
                     Change=True
     
                                           
-print("Y=",Y)
+
 if Y=="POSSIBLE":
+    print("Y=",Y)    
     print("L=",L)
+
+else:
+    print("Y=",Y)
+    
 
 
 
