@@ -15,13 +15,15 @@ for i in range(R):
 count=0
 Path=[[]]
 print(len(Path))
+Change=True
 
-if Y=="IMPOSSIBLE":
+
+while Change:
+    Change=False
     for i in range (R):
         for j in range (C):
             #Coordenada inicial        
             if len(Path)<C*R:
-                count=count+1
                 Path=[[]] #Si vuelve aquí es que no ha ido y se reescribe
                 r=Casillas[i,j,0]
                 c=Casillas[i,j,1]
@@ -30,12 +32,12 @@ if Y=="IMPOSSIBLE":
                 Path.pop(0)
                 rp=r
                 cp=c
-                m=0
-                while m<=R:  #Para que pueda iterar en coordenadas de i,j ya usadas
+                Changing=True
+                while Changing:  #Para que pueda iterar en coordenadas de i,j ya usadas
+                    Changing=False
                     for i in range (R):
                         for j in range (C):
                             #Demás coordenadas
-                            m=m+1
                             r=Casillas[i,j,0]
                             c=Casillas[i,j,1]
                             if not (r==rp or c==cp or r-c==rp-cp or r+c==rp+cp or [r,c] in Path):
@@ -44,15 +46,16 @@ if Y=="IMPOSSIBLE":
                                 Path.append(Place)
                                 rp=r
                                 cp=c
+                                Changing=True
     
                         
             else:
                 Y="POSSIBLE"
                 L=Path                    
 
-else:
-    print("Y=",Y)
-    print("L=",L)
+
+print("Y=",Y)
+print("L=",L)
 
     
         
